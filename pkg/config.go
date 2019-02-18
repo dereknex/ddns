@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"io/ioutil"
+	"path/filepath"
 
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
@@ -13,6 +14,12 @@ type Server struct {
 	Port int    `yaml:"port"`
 }
 
+// Client information
+type Client struct {
+	Domains []string `yaml:"domains"`
+	Token   string   `yaml:"token"`
+}
+
 //Config for client
 type Config struct {
 	Server   *Server `yaml:"server"`
@@ -20,9 +27,16 @@ type Config struct {
 	Duration string  `yaml:"duration"`
 }
 
+// ServerConfig config information for server
+type ServerConfig struct {
+	Port    int      `yaml:"port"`
+	Clients []Client `yaml:"clients"`
+}
+
 // LoadConfig read config file
-func LoadConfig(path string) *Config {
-	yamlFile, err := ioutil.ReadFile(path)
+func LoadConfig(fileName string) *Config {
+	p, err := filepath.Abs(fileName)
+	yamlFile, err := ioutil.ReadFile(p)
 	if err != nil {
 		log.Fatal(err)
 		return nil
@@ -34,5 +48,12 @@ func LoadConfig(path string) *Config {
 		log.Fatalf("Read config error: %s", err.Error())
 		return nil
 	}
+	return cfg
+}
+
+// LoadServerConfig read server config from file
+func LoadServerConfig(fileName string) *ServerConfig {
+
+	cfg := &ServerConfig{}
 	return cfg
 }
