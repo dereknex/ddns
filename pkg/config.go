@@ -1,11 +1,11 @@
 package pkg
 
 import (
+	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"path/filepath"
 
 	log "github.com/sirupsen/logrus"
-	"gopkg.in/yaml.v2"
 )
 
 //Server info
@@ -53,7 +53,18 @@ func LoadConfig(fileName string) *Config {
 
 // LoadServerConfig read server config from file
 func LoadServerConfig(fileName string) *ServerConfig {
+	p, err := filepath.Abs(fileName)
+	yamlFile, err := ioutil.ReadFile(p)
+	if err != nil {
+		log.Fatal(err)
+		return nil
+	}
 
 	cfg := &ServerConfig{}
+	err = yaml.Unmarshal(yamlFile, cfg)
+	if err != nil {
+		log.Fatalf("Read config error: %s", err.Error())
+		return nil
+	}
 	return cfg
 }

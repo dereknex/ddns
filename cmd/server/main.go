@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/dereknex/ip-changed/pkg"
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/cobra"
 )
 
 func runServer() {
