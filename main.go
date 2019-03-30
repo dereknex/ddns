@@ -1,15 +1,16 @@
 package main
 
 import (
-	"github.com/dereknex/ip-changed/cmd"
 	"os"
 	"runtime"
+
+	"github.com/dereknex/ddns/cmd"
 )
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	resp := cmd.Execute(os.Args[1:])
-	if resp.Err != nil {
+	err := cmd.Execute(os.Args[1:])
+	if err != nil {
 		os.Exit(-1)
 	}
 }
