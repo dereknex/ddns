@@ -3,6 +3,7 @@ module github.com/dereknex/ddns
 go 1.12
 
 require (
+	github.com/aws/aws-sdk-go v1.15.77
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gin-contrib/sse v0.0.0-20190125020943-a7658810eb74
 	github.com/gin-gonic/gin v1.3.0
