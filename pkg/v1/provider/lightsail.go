@@ -3,26 +3,29 @@ package provider
 import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/lightsail"
+	"github.com/aws/aws-sdk-go/service/lightsail/lightsailiface"
 )
 
-// Lightsail is a DNS provider
-type Lightsail struct {
-	sess *session.Session
+// LightsailProvider is a DNS provider
+type LightsailProvider struct {
+	svc lightsailiface.LightsailAPI
 }
 
-// InitLightsail create a lightsail struct
-func InitLightsail(region string) (*Lightsail, error) {
+// InitLightsailProvider create a lightsail struct
+func InitLightsailProvider(region string) (*LightsailProvider, error) {
 	sess, err := session.NewSession(&aws.Config{Region: aws.String(region)})
 	if err != nil {
 		return nil, err
 	}
-	return &Lightsail{
-		sess: sess,
+	svc := lightsail.New(sess)
+	return &LightsailProvider{
+		svc: svc,
 	}, nil
 }
 
 // GetRecord read a dns record
-func (l *Lightsail) GetRecord(record string) (value string, err error) {
+func (l *LightsailProvider) GetRecord(record string) (value string, err error) {
 
 	return "", nil
 }
