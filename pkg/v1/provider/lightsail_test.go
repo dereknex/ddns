@@ -400,5 +400,8 @@ func TestGetRecord(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, p)
 	p.svc = new(LightsailAPI)
+	value, err := p.GetRecord("test", "example.com")
+	assert.Nil(t, err)
+	assert.Equal(t, "10.0.0.1", value)
 
 }
