@@ -23,7 +23,8 @@ func InitLightsailProvider(region string) (*LightsailProvider, error) {
 	}
 	svc := lightsail.New(sess)
 	return &LightsailProvider{
-		svc: svc,
+		svc:     svc,
+		domains: make(map[string]*lightsail.Domain),
 	}, nil
 }
 
@@ -48,9 +49,14 @@ func (l *LightsailProvider) GetRecord(record string, domain string) (value strin
 	l.domains[domain] = output.Domain
 	for _, entry := range l.domains[domain].DomainEntries {
 		if record == *entry.Name {
-			value = *entry.Name
+			value = *entry.Target
 			return
 		}
 	}
 	return "", errors.New("not found")
+}
+
+// SetRecord change dns record, if record not exists create it
+func (l *LightsailProvider) SetRecord(name, value string) (err error) {
+	return err
 }
