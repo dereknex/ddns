@@ -38,10 +38,13 @@ func InitLightsailProvider(region string) (*LightsailProvider, error) {
 }
 
 // GetRecord read a dns record
-func (l *LightsailProvider) GetRecord(record string, domain string) (value string, err error) {
-
-	for _, entry := range l.items[domain].domain.DomainEntries {
-		if record == *entry.Name {
+func (l *LightsailProvider) GetRecord(name string, domain string) (value string, err error) {
+	d, err := l.getDomain(domain)
+	if err != nil {
+		return
+	}
+	for _, entry := range d.DomainEntries {
+		if name == *entry.Name {
 			value = *entry.Target
 			return
 		}
@@ -50,7 +53,27 @@ func (l *LightsailProvider) GetRecord(record string, domain string) (value strin
 }
 
 // SetRecord change dns record, if record not exists create it
-func (l *LightsailProvider) SetRecord(name, value string) (err error) {
+func (l *LightsailProvider) SetRecord(name, value string, domain string) (err error) {
+	_, err = l.getDomain(domain)
+	if err != nil {
+		return err
+	}
+
+	err = l.createEntry(name, value, domain)
+	return err
+}
+
+func (l *LightsailProvider) createEntry(name, value, domain string) (err error) {
+	t := "A"
+	input := &lightsail.CreateDomainEntryInput{
+		DomainEntry: &lightsail.DomainEntry{
+			Name: &name,
+			Target: &value,
+			Type: &t,
+		},
+		DomainName: &domain,
+	}
+	_, err = l.svc.CreateDomainEntry(input)
 	return err
 }
 
