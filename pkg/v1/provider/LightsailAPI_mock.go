@@ -897,26 +897,31 @@ func (_m *LightsailAPI) CreateDomain(_a0 *lightsail.CreateDomainInput) (*lightsa
 }
 
 // CreateDomainEntry provides a mock function with given fields: _a0
-func (_m *LightsailAPI) CreateDomainEntry(_a0 *lightsail.CreateDomainEntryInput) (*lightsail.CreateDomainEntryOutput, error) {
-	ret := _m.Called(_a0)
-
-	var r0 *lightsail.CreateDomainEntryOutput
-	if rf, ok := ret.Get(0).(func(*lightsail.CreateDomainEntryInput) *lightsail.CreateDomainEntryOutput); ok {
-		r0 = rf(_a0)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*lightsail.CreateDomainEntryOutput)
-		}
+func (_m *LightsailAPI) CreateDomainEntry(input *lightsail.CreateDomainEntryInput) (*lightsail.CreateDomainEntryOutput, error) {
+	//ret := _m.Called(_a0)
+	//
+	//var r0 *lightsail.CreateDomainEntryOutput
+	//if rf, ok := ret.Get(0).(func(*lightsail.CreateDomainEntryInput) *lightsail.CreateDomainEntryOutput); ok {
+	//	r0 = rf(_a0)
+	//} else {
+	//	if ret.Get(0) != nil {
+	//		r0 = ret.Get(0).(*lightsail.CreateDomainEntryOutput)
+	//	}
+	//}
+	//
+	//var r1 error
+	//if rf, ok := ret.Get(1).(func(*lightsail.CreateDomainEntryInput) error); ok {
+	//	r1 = rf(_a0)
+	//} else {
+	//	r1 = ret.Error(1)
+	//}
+	//
+	//return r0, r1
+	domain := input.DomainName
+	if *domain == "example.com" {
+		return &lightsail.CreateDomainEntryOutput{}, nil
 	}
-
-	var r1 error
-	if rf, ok := ret.Get(1).(func(*lightsail.CreateDomainEntryInput) error); ok {
-		r1 = rf(_a0)
-	} else {
-		r1 = ret.Error(1)
-	}
-
-	return r0, r1
+	return nil, errors.New("invaild test data")
 }
 
 // CreateDomainEntryRequest provides a mock function with given fields: _a0
