@@ -1,6 +1,9 @@
 solvers:
   - icanhazip
   - ident
+  - ifconfig
 domains:
-  nextty.com:
-    - ddns
+  "nextty#com":
+    provider: lightsail
+    entrys:
+      - ddns.nextty.com
