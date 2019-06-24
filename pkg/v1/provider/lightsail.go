@@ -26,7 +26,8 @@ type LightsailProvider struct {
 
 // InitLightsailProvider create a lightsail struct
 func InitLightsailProvider(region string) (*LightsailProvider, error) {
-	sess, err := session.NewSession(&aws.Config{Region: aws.String(region)})
+
+	sess, err := session.NewSession(aws.NewConfig().WithRegion(region))
 	if err != nil {
 		return nil, err
 	}

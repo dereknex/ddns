@@ -1,5 +1,9 @@
-server:
-  host: ddns.nextty.com
-  port: 6001
-token: 571484d671611f4fb6770d06c8c1eabd
-duration: 5m
+solvers:
+  - icanhazip
+  - ident
+  - ifconfig
+domains:
+  "nextty#com":
+    provider: lightsail
+    entrys:
+      - ddns.nextty.com
