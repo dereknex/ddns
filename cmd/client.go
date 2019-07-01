@@ -17,7 +17,8 @@ import (
 )
 
 var cfgFile string
-const duration = 5 * time.Second
+
+const duration = 60 * time.Second
 
 func init() {
 	rootCmd.AddCommand(clientCmd)
