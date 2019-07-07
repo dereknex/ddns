@@ -1,3 +1,5 @@
+
+secure: "l83C2JIGon0MC3xODlqwwFAPc0eS0IurqlyYQwQ7+PWClVqQniTQ/6z2nUQHuH2ws/9xQ/k8JDSO5CwAzOp0d66H4Hy6sL8+n26PqKQSCmXowMQm+TXWKl2+Y5gDIuedIZdUrO6GPd3FK6rTVe4lK8GCPumBOweNictj1vdmWGG81WUrZP1fATzl5W/TZrLhwPHzz6+1S5QgwOAqGu9LyTAovVGg8uF/8homoiA+pB1WVIeDay6KnZeJ5+XDzPvkYNsJNyT86z1alHD8ydyBaSl/WCJqG6e5AUvHRWGZhLv76E3tYrANm27KIA445coxvqKdtTe1ur0lwQn42HV6+ifkWR/XSn+cPkAlOexO44qhkoE0ZNGkTKOXeAVDxiAe+ae0cMhOaldDTD/4sBupONWuYTVHPRhWGRaZjVsnXEsYPt2RH68Wsyz0JC5w68igbB2SysUq1RTRwZxUeTmoGX8HkHHt8NJZVuJQSU+pcXrEldV349BS/MBpHBQYE7Pa8/nOgdFiItIvkOO7jLo2y5iopuvYBhx4OUFo2fwhzEe957fyEVUIpsNdaLe/kQyizu6fEwu2J7j0LtEtAaRJqmNpZd2Jtlt2GzA2o44/OXoUdIuguJv7viWZsyoyodnxu+zxcp+JwZ36XHcTV38baEYv9MQdk6hw3clFbuvSLHc="
 language: go
 
 go:
@@ -9,8 +11,8 @@ script:
 
 deploy:
   provider: releases
-  api_key: "GITHUB OAUTH TOKEN"
-  file: "ddns.tar.gz"
+  api_key: $GITHUB_TOKEN
+  file: ddns.tar.gz
   skip_cleanup: true
   on:
     tags: true
