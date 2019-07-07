@@ -1,6 +1,16 @@
 language: go
 
 go:
-- master
+- "1.12"
 
-script: go build
+script: 
+- go build
+- tar czvf ddns.tar.gz ddns
+
+deploy:
+  provider: releases
+  api_key: "GITHUB OAUTH TOKEN"
+  file: "ddns.tar.gz"
+  skip_cleanup: true
+  on:
+    tags: true
