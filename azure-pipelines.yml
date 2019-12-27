@@ -8,11 +8,12 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
+variables:
+  GOBIN:  '$(GOPATH)/bin' # Go binaries path
+  GOROOT: '/usr/local/go1.11' # Go installation path
+  GOPATH: '$(system.defaultWorkingDirectory)/gopath' # Go workspace path
+  modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
 steps:
 - script: |
-    make
-  displayName: 'make'
-- task: Go@0
-  inputs:
-    command: 'get'
+    go build
+  displayName: 'build'
